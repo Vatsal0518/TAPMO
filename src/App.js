@@ -10,12 +10,14 @@ import './App.css'
 import UserCard from './UserCard/UserCard'
 import Createcard from './CreateCard/Createcard'
 import Editcard from './EditCard/Editcard'
+import Navigation from './HomePage/Navigation'
 
 function App() {
   return <>
   <div className='Main'>
 
   <BrowserRouter>
+  <Navigation/>
   <Routes>
     <Route path='/' element={<Home/>}/>
     <Route path='/login' element={<Login/>}/>

@@ -40,7 +40,8 @@ function Home() {
 
   return  <div className="home">
     <div className="navigationbar">
-      <Navigation/>
+      
+      hello world
     </div>
   </div>
   
