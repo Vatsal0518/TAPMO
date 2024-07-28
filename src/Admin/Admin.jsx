@@ -21,7 +21,7 @@ function Admin() {
                 navigate('/isadmin')
 
             }
-            const response = await axios.get('http://localhost:8000/admin');
+            const response = await axios.get('https://nfc-1.onrender.com/admin');
             setuserdata(response.data)
          
            
