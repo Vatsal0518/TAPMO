@@ -34,9 +34,8 @@ function Navigation() {
 
   return (
     <nav>
-      <Link to="/" className="title">
-        Website
-      </Link>
+   <img height={50} width={90} src="./logo.png" alt="" />
+   
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>
         <span></span>
