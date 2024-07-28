@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const Login = () => {
-  
-   
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,15 +22,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://nfc-1.onrender.com/login', formData)
-      
+      const response = await axios.post('https://nfc-1.onrender.com/login', formData);
       alert('Login successful!');
       Cookies.set('token', response.data.token, { expires: 1/24, secure: true });
-     
-navigate("/",{state: {tokendata:response.data.token}})
-
+      navigate('/', { replace: true }); // Redirect to home page with replace
     } catch (error) {
-        alert('email ID or password incorrect')
+      alert('Email ID or password incorrect');
       console.error('There was an error logging in!', error);
     }
   };
@@ -66,7 +61,7 @@ navigate("/",{state: {tokendata:response.data.token}})
         <Button type="submit">Login</Button>
         <br />
         <br />
-        <Button onClick={()=>{navigate('/signup')}}>Signup</Button>
+        <Button onClick={() => navigate('/signup')}>Signup</Button>
       </Form>
     </Container>
   );
