@@ -16,7 +16,7 @@ function Admin() {
         const fetchData = async () => {
           try {
 
-            if(privatekey!=Cookies.get('privatekey'))
+            if(privatekey!==Cookies.get('privatekey'))
             {
                 navigate('/isadmin')
 
