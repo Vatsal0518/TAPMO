@@ -60,7 +60,7 @@ function Navigation() {
       
       
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-        <MenuIcon/>
+        <MenuIcon  className='menuicon' fontSize='large'/>
         
       </div>
       <ul className={menuOpen ? "open" : ""}>

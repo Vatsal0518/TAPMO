@@ -1,3 +1,4 @@
+/* Base styles for navigation */
 nav {
   display: flex;
   justify-content: space-between;
@@ -6,8 +7,10 @@ nav {
   color: rgb(255, 255, 255);
   position: sticky;
   top: 0;
+  z-index: 1000; /* Ensure nav is on top of other content */
 }
 
+/* Title styles (if you have any) */
 nav .title {
   font-size: 1.5rem;
   margin: 1rem;
@@ -23,7 +26,7 @@ nav ul {
 
 nav ul li {
   list-style: none;
-  position: relative; /* Ensure dropdowns are positioned correctly */
+  position: relative;
 }
 
 nav ul li a {
@@ -41,17 +44,14 @@ nav ul li a:not(.active):hover {
 
 nav .menu {
   display: none;
-  position: absolute;
-  top: 0.75rem;
-  right: 0.5rem;
+  position: relative; /* Changed from absolute */
   flex-direction: column;
   justify-content: space-between;
   width: 2.25rem;
   height: 2rem;
 }
 
-
-
+/* User profile and dropdown styles */
 .user-profile {
   position: relative;
 }
@@ -96,21 +96,38 @@ nav .menu {
   display: flex;
 }
 
+/* Mobile view adjustments */
 @media (max-width: 480px) {
-  nav .menu {
-    display: flex;
-  }
-
   nav {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch; /* Adjust alignment */
   }
+
+  .logo {
+  
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-right: 10px;
+    
+    padding: 2px; /* Adjust padding to ensure it’s not too close to the edge */
+  }
+
+  nav .menu {
+   
+   bottom : 50px;
+    display: flex;
+    margin-left: auto; /* Position menu icon to the right */
+    margin-right: 1rem; /* Add spacing on the right side */
+    position: relative; /* Ensure it does not overlap other content */
+  }
+
 
   nav ul {
     display: none;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 0.25rem;
+    
   }
 
   nav ul.open {
@@ -123,10 +140,7 @@ nav .menu {
   }
 
   nav ul li a {
-    margin: 0.2rem 0.5rem;
-  }
-  .logo{
-    position: absolute;
-    left: 10px
+    margin: 0.5rem 0; /* Adjust margin to ensure items are not too close */
+    padding: 1rem; /* Add padding for better touch target */
   }
 }
