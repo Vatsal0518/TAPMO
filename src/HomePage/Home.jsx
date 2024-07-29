@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import './Home.css'
+
+
 import Navigation from './Navigation';
 function Home() {
  const navigate = useNavigate();
@@ -39,10 +41,12 @@ function Home() {
 
 
   return  <div className="home">
-    <div className="navigationbar">
-      
-      hello world
+    <div className="upper-screen">
+ 
+  
     </div>
+    
+    
   </div>
   
 }

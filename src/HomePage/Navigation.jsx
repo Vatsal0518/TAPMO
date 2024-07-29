@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import '../HomePage/Navigation.css';
 import Dropdown from './Dropdown';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,12 +53,15 @@ function Navigation() {
 
   return (
     <nav>
+      <div className="logo">
       <img height={50} width={90} src="./logo.png" alt="Logo" />
+
+      </div>
+      
       
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
+        <MenuIcon/>
+        
       </div>
       <ul className={menuOpen ? "open" : ""}>
         <li>
