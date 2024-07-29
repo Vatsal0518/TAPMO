@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import '../components/Mycard.css';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import QRCode from 'qrcode.react';
 function Mycard() {
   const [data, setdata] = React.useState([]);
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ function Mycard() {
             <div className="upper">
               <div className="left">
                 <img height={40} width={80} src="logo.png" alt="" />
-                <div className="text">TEPMO</div>
+                <div className="text">VISCO</div>
               </div>
               <div className="right">
                 <img height={40} width={40} src="nfc.png" alt="" />
@@ -83,7 +83,8 @@ function Mycard() {
 
               <div className="lower-right">
                 <div className="lower-image">
-                  <img height={112} width={112} src="https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png" alt="" />
+                <QRCode size={106} value={'https://viscocard.netlify.app/mycard/'+data[0]._id} />
+                
                 </div>
 
 
