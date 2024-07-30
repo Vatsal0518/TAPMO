@@ -12,7 +12,7 @@ function Editcard() {
   const [isUserLogin, setIsUserLogin] = useState(false);
   const [username, setUsername] = useState('');
   const token =
-    Cookies.get('token') ||
+    Cookies.get('token-auth') ||
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
   useEffect(() => {

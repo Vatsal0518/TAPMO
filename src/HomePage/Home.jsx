@@ -13,7 +13,7 @@ function Home() {
   const [username,setusername]= React.useState()
   React.useEffect(() => {
     // JWT token
-    const token = Cookies.get('token');
+    const token = Cookies.get('token-auth');
   
     // Function to fetch data
     const fetchData = async () => {

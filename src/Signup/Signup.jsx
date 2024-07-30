@@ -3,14 +3,15 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Container, Form, FormGroup, Label, Input, Button, Title } from '../components/styles';
 
-
 const Signup = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
+  const [error, setError] = useState(''); // State for error message
+  const [loading, setLoading] = useState(false); // State for loading
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,21 +22,30 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
+    setLoading(true); // Start loading
+    setError(''); // Clear previous errors
+
     try {
       const response = await axios.post('https://nfc-1.onrender.com/signup', formData);
       console.log(response.data);
       alert('Signup successful!');
-      navigate('/login')
-     
-      
+      navigate('/login');
     } catch (error) {
-      alert('user already exist');
-      navigate('/login')
-        
-       
-      console.error( error);
+      // Handle errors in a user-friendly manner
+      if (error.response) {
+        if (error.response.data && error.response.data.error) {
+          // Customize error messages based on backend response
+          setError(error.response.data.error);
+        } else {
+          setError('Something went wrong. Please try again.'); // Fallback error message
+        }
+      } else {
+        setError('Network error. Please check your internet connection.'); // Network error
+      }
+      console.error(error);
+    } finally {
+      setLoading(false); // End loading
     }
   };
 
@@ -76,12 +86,14 @@ const Signup = () => {
             required 
           />
         </FormGroup>
-        <Button type="submit">Sign Up</Button>
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+        <Button type="submit" disabled={loading}>
+          {loading ? 'Signing Up...' : 'Sign Up'} {/* Loading state */}
+        </Button>
         <br />
         <br />
-        <Button onClick={()=>{navigate('/login')}}>Login</Button>
+        <Button onClick={() => navigate('/login')}>Login</Button>
       </Form>
-    
     </Container>
   );
 };

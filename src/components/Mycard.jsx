@@ -25,7 +25,7 @@ function Mycard() {
   };
 
   React.useEffect(() => {
-    const token = Cookies.get('token');
+    const token = Cookies.get('token-auth');
 
     const fetchData = async () => {
       try {

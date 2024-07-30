@@ -10,7 +10,7 @@ function Createcard() {
     const navigate = useNavigate()
     const [isUserLogin,setIsUserLogin] = React.useState(false);
     const [username,setusername] = React.useState()
-    const token = Cookies.get('token')||"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+    const token = Cookies.get('token-auth')||"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
     const parts = token.split('.');
     const decodedPayload = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'));
     const parsedPayload = JSON.parse(decodedPayload);

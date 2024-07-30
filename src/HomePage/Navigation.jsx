@@ -11,19 +11,21 @@ function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isUserLogin, setIsUserLogin] = useState(false);
   const [username, setUsername] = useState('');
-  const [token, setToken] = useState(Cookies.get('token') || '');
+  const [token, setToken] = useState(Cookies.get('token-auth') || '');
   const location = useLocation();
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = Cookies.get('token');
-      setToken(token || '');
+      const token = Cookies.get('token-auth'); // Ensure token retrieval is consistent
+      console.log('Fetched token:', token);
+  
       if (token) {
         const parts = token.split('.');
         const decodedPayload = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'));
         const parsedPayload = JSON.parse(decodedPayload);
-
+  
         try {
           const response = await axios.get(`https://nfc-1.onrender.com/${parsedPayload.userId}`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -31,26 +33,27 @@ function Navigation() {
           setIsUserLogin(true);
           setUsername(response.data.username);
         } catch (error) {
-          Cookies.remove('token');
+          Cookies.remove('token-auth');
           setToken('');
           setIsUserLogin(false);
+          setUsername('');
         }
       } else {
         setIsUserLogin(false);
+        setUsername('');
       }
     };
-
+  
     fetchUserData();
-  }, [location.pathname]);
-
+  }, [token]); // Dependency array should include token
+  
   const handleLogout = () => {
-    Cookies.remove('token');
+    Cookies.remove('token-auth'); // Ensure cookie name is consistent
     setToken('');
     setIsUserLogin(false);
     setUsername('');
     navigate('/'); // Redirect to home after logout
   };
-
   return (
     <nav>
       <div className="logo">

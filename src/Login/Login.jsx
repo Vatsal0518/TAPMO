@@ -10,6 +10,8 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(''); // State for error message
+  const [loading, setLoading] = useState(false); // State for loading
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,14 +23,24 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
+    setError(''); // Clear previous errors
+
     try {
       const response = await axios.post('https://nfc-1.onrender.com/login', formData);
+      Cookies.set('token-auth', response.data.token, { expires: 7, secure: true });
       alert('Login successful!');
-      Cookies.set('token', response.data.token, { expires: 1/24, secure: true });
-      navigate('/', { replace: true }); // Redirect to home page with replace
+      navigate('/'); // Redirect to home page
     } catch (error) {
-      alert('Email ID or password incorrect');
+      if (error.response) {
+        // Display specific error messages
+        setError(error.response.data.error || 'Something went wrong. Please try again.');
+      } else {
+        setError('Network error. Please check your internet connection.'); // Network error
+      }
       console.error('There was an error logging in!', error);
+    } finally {
+      setLoading(false); // End loading
     }
   };
 
@@ -58,7 +70,10 @@ const Login = () => {
             required 
           />
         </FormGroup>
-        <Button type="submit">Login</Button>
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+        <Button type="submit" disabled={loading}>
+          {loading ? 'Logging In...' : 'Login'} {/* Loading state */}
+        </Button>
         <br />
         <br />
         <Button onClick={() => navigate('/signup')}>Signup</Button>

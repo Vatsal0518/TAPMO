@@ -9,7 +9,7 @@ const Dropdown = ({ username }) => {
 
     const handleLogout = async () => {
         try {
-            Cookies.remove('token');
+            Cookies.remove('token-auth');
             window.location.reload();
         } catch (e) {
             console.log(e);
